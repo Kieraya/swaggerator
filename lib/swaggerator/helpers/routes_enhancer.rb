@@ -11,10 +11,10 @@ module Swaggerator
 			    	r[:route_params] =  r[:path].scan(/:[^\/]+/)
 			    	r[:summary] =r[:name].humanize || r[:path].humanize
 			      	r[:description] = r[:summary]
-			    	r[:responses]= {}
-			    	r[:responses]['200']=[]
-			    	r[:responses]['200']<< { description: 'Stubbed' }
-			    	r[:parameters]= []
+			    	#r[:responses]= {}
+			    	#r[:responses]['200']=[]
+			    	#r[:responses]['200']<< { description: 'Stubbed' }
+			    	#r[:parameters]= []
 			    	r[:executioner]=r[:reqs][/^([^ ]+)/]
 			    	begin
 

@@ -35,8 +35,7 @@ module Swaggerator
 						definition= {
 							name: param,
 							description: param.to_s.humanize,
-							summary: param.to_s.humanize,
-							schema: { type: "string"},
+							type: "string",
 						} 
 					end
 				
@@ -45,16 +44,14 @@ module Swaggerator
 						definition = {
 							name: param,
 							description: param.to_s.humanize,
-							summary: param.to_s.humanize,
-							schema: {type: "object"},
+							type: "object",
 							properties:[],
 						}
 						param[key].each do |val|
 							definition[:properties]<<{
 								name: val,
 								description: val.to_s.humanize,
-								summary: val.to_s.humanize,
-								schema: {type: "string"},
+								type: "string",
 							}
 							
 						end

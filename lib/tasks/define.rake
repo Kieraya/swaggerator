@@ -40,6 +40,14 @@ namespace :swaggerator do
   	end
   	response
   end
+
+  task generate: :environment do 
+    data = YAML.load_file('swag/define.yml')
+    response = Swaggerator::Renderer.render(data)
+
+    open("swag/swagger.json", 'w') { |f| f << response.to_json }
+
+  end
   task definition: :environment do
 
     data = Swaggerator::Integrator.get_definition

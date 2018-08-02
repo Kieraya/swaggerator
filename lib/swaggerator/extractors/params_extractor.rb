@@ -25,7 +25,7 @@ module Swaggerator
 					end
 				end
 				@parameters_detected.delete('params')
-				@param_fields.map!(&:to_sym)
+				@param_fields.map!(&:to_s)
 			end
 
 			def detect_param_method_fields(controller_class)

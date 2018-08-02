@@ -4,6 +4,7 @@ require "swaggerator/mockers/action_controller_simulator"
 require "swaggerator/mockers/action_param_interceptor"
 require "swaggerator/integrator"
 require "swaggerator/helpers/routes_mapper.rb"
+require "swaggerator/renderer"
 
 module Swaggerator
   # Your code goes here...
