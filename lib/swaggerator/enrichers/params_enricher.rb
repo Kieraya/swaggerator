@@ -1,4 +1,5 @@
 require "swaggerator/helpers/routes_mapper"
+require "swaggerator/helpers/params_codifier"
 module Swaggerator
 	module Enrichers
 		class ParamsEnricher
@@ -17,7 +18,7 @@ module Swaggerator
 						extractor.detect_param_method_fields(controller_class)
 						functional_params = extractor.param_fields
 						field_name = route[:verb].downcase.to_sym == :get ? :query_params : :body_params
-						route[field_name]= codify(functional_params)
+						route[field_name]= Swaggerator::Helpers::ParamsCodifier.codify(functional_params)
 						 
 #						puts "ParamsEnricher threw an #{e} except while processing #{route[:path] }:  #{route[:verb]}"
 					

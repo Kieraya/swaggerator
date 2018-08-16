@@ -3,7 +3,7 @@ module Swaggerator
 		def self.render(routes_grouped)
 			response = { paths: {},
 		  	 	openapi: "3.0.0",
-		  	 	info: {title: "Sample API",
+		  	 	info: {title: "API",
 		  	 	description: "Stubbed",
 		  	 	version: "0.1.9"}, 
 		  	}
@@ -15,6 +15,7 @@ module Swaggerator
   					method_response[:responses]['200']= {description: "Stubbed"}
 
           			method_response[:parameters]= []
+          			method_response[:tags]= method_content[:tags]
 
           			method_content[:route_params].each do | route_param|
 	          			param_response={

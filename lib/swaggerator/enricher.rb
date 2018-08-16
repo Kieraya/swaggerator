@@ -1,6 +1,8 @@
 require "swaggerator/enrichers/params_enricher"
+require "swaggerator/enrichers/tags_enricher"
+
 module Swaggerator
-	REGISTERED_ENRICHERS=[Swaggerator::Enrichers::ParamsEnricher]
+	REGISTERED_ENRICHERS=[Swaggerator::Enrichers::ParamsEnricher,Swaggerator::Enrichers::TagsEnricher]
 	class Enricher
 
 		def self.enrich(routes)
