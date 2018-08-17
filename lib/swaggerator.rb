@@ -6,6 +6,7 @@ require "swaggerator/integrator"
 require "swaggerator/helpers/routes_mapper.rb"
 require "swaggerator/renderer"
 require 'active_support/all'
+require 'swaggerator/config'
 
 module Swaggerator
   # Your code goes here...

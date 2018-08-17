@@ -1,12 +1,15 @@
 namespace :swaggerator do
   desc "Generate a swagger file based on the routes file"
 
+  task check: :environment do 
+    puts Swaggerator::Config.open_api_version
+  end
   def render(obj)
   	response = { paths: {},
-  	 openapi: "3.0.0",
-  	 info: {title: "Sample API",
-  	 description: "Stubbed",
-  	 version: "0.1.9"}, 
+  	 openapi: Swagger::Config.open_api_version,
+  	 info: {title: Swagger::Config.title,
+  	 description: Swagger::Config.description,
+  	 version: Swagger::Config.version}, 
   	 }
   	obj.each do |path, path_content|
   		path_response={}

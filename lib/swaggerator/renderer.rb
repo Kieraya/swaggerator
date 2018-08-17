@@ -2,11 +2,12 @@ module Swaggerator
 	class Renderer
 		def self.render(routes_grouped)
 			response = { paths: {},
-		  	 	openapi: "3.0.0",
-		  	 	info: {title: "API",
-		  	 	description: "Stubbed",
-		  	 	version: "0.1.9"}, 
-		  	}
+				openapi: Swaggerator::Config.open_api_version,
+				info: {title: Swaggerator::Config.title,
+				description: Swaggerator::Config.description,
+				version: Swaggerator::Config.version}, 
+			}
+	 
 		  	routes_grouped.each do |path, path_content|
 	  			path_response={}
 	  		    path_content.each do |method_name, method_content|

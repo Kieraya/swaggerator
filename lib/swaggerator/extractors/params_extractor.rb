@@ -32,10 +32,10 @@ module Swaggerator
 				parameters_detected.keys.each do |parameter|
 					begin
 						the_method = controller_class.instance_method(parameter)
-					source_code = the_method.source
-					source_code = source_code.split("\n").tap{|x| x.shift; x.pop}.join("\n")
-					#puts "PARSED PARAMS",parser(source_code).params
-					@param_fields+=parser(source_code).params
+						source_code = the_method.source
+						source_code = source_code.split("\n").tap{|x| x.shift; x.pop}.join("\n")
+						#puts "PARSED PARAMS",parser(source_code).params
+						@param_fields+=parser(source_code).params
 
 					rescue =>e
 						puts e
