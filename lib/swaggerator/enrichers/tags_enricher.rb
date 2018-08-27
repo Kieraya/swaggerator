@@ -6,7 +6,7 @@ module Swaggerator
 				routes.map do |route|
 					components = route[:path].split(/\//)
 					components.reject!{|c| c=~/:/||/^api/=~c||  /v\d+/ =~c || c.blank? }
-					route[:tags]=components.map(&:singularize)
+					route[:tags]=[components.try(:first).try(:singularize)]
 					route
 				end
 

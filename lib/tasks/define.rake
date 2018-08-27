@@ -1,47 +1,13 @@
+require "tty-spinner"
+require 'swaggerator/logger'
+require 'tty-table'
+require 'terminal-table'
+
 namespace :swaggerator do
   desc "Generate a swagger file based on the routes file"
 
   task check: :environment do 
     puts Swaggerator::Config.open_api_version
-  end
-  def render(obj)
-  	response = { paths: {},
-  	 openapi: Swagger::Config.open_api_version,
-  	 info: {title: Swagger::Config.title,
-  	 description: Swagger::Config.description,
-  	 version: Swagger::Config.version}, 
-  	 }
-  	obj.each do |path, path_content|
-  		path_response={}
-
-  			path_content.each do |method_name, method_content|
-  				method_response= {}
-  				method_response[:responses] = {}
-  				method_response[:responses]['200']= {description: "Stubbed"}
-
-          method_response[:parameters]= []
-  				method_content[:route_params].each do | route_param|
-
-  					method_response[:parameters] = method_response[:parameters] || []
-  					param_response={
-  						in: :path,
-  						name: route_param,
-  						required: true,
-  						description: route_param.humanize,
-  						schema: {type: "string"}
-
-  					}
-  					method_response[:parameters] << param_response
-  				end
-
-
-  				path_response[method_name]= method_response
-  				
-  			end
-  		response[:paths][path]= path_response
-
-  	end
-  	response
   end
 
   task generate: :environment do 
@@ -51,13 +17,17 @@ namespace :swaggerator do
     open("swag/swagger.json", 'w') { |f| f << response.to_json }
 
   end
-  task definition: :environment do
-
+  task define: :environment do
+    spinner = TTY::Spinner.new
+    spinner.auto_spin
     data = Swaggerator::Integrator.get_definition
+    spinner.stop("Done")
+    dir = "swag"
+    Dir.mkdir(dir) unless Dir.exists?(dir)
+  
 
-
-    if(File.exist?("swag/define.yaml") && false)
-      loaded_data = YAML.load_file('swag/define.yaml')
+    if(File.exist?("swag/define.yml") )
+      loaded_data = YAML.load_file('swag/define.yml')
       paths_added= 0
       methods_added =0
 
@@ -85,6 +55,23 @@ namespace :swaggerator do
       open("swag/define.yml", 'w') { |f| f << loaded_data.to_yaml }
       puts "Paths added: #{paths_added} "
       puts "Methods added: #{methods_added} "
+
+      errors= Swaggerator::Logger.get
+      if(errors.present?)
+
+        puts 
+        puts "Errors:"
+        #puts errors
+       
+        rows= []
+        rows<<["Module", "Source", "Errors"]
+        errors.map{|erro| 
+          rows<<erro
+        }
+        table = Terminal::Table.new :rows => rows
+
+        puts table
+      end
 
     else 
       open("swag/define.yml", 'w') { |f| f << data.to_yaml }

@@ -40,7 +40,7 @@ RSpec.describe Swaggerator::Enrichers::TagsEnricher do
 
 			},{
 				path: "/users/:id/cars",
-				tags: ["user","car"]
+				tags: ["user"]
 
 			},{
 				path:"/api/v1/users/:id",

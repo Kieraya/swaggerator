@@ -8,6 +8,8 @@ module Swaggerator
 		##Loads the route inspector depending on the rails version. 
 
 		def self.get_definition
+			
+			
 			routes = Helpers::RoutesLoader.extract_routes
 			routes = Helpers::RoutesEnhancer.enhance(routes)
 			routes = Enricher.enrich(routes)

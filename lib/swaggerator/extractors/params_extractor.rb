@@ -10,8 +10,8 @@ module Swaggerator
 				parameter_methods_detected = {
 					
 				}
-				@parameters_detected={}
-				@param_fields= []
+				@parameters_detected = {}
+				@param_fields = []
 				params_matches.map do |param_match|
 					param_name = param_match[0]
 					@parameters_detected[param_name]||=[]
@@ -34,11 +34,11 @@ module Swaggerator
 						the_method = controller_class.instance_method(parameter)
 						source_code = the_method.source
 						source_code = source_code.split("\n").tap{|x| x.shift; x.pop}.join("\n")
-						#puts "PARSED PARAMS",parser(source_code).params
 						@param_fields+=parser(source_code).params
 
 					rescue =>e
-						puts e
+						Swaggerator::Logger.push ["ParamsExtractor", "#{controller_class.name}##{parameter}","#{e}"]
+						
 					end
 
 				end
