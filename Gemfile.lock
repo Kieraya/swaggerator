@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     swaggerator (0.1.0)
+      terminal-table
       tty-spinner
       tty-table
 
@@ -37,9 +38,13 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    strings (0.1.2)
+    strings (0.1.4)
+      strings-ansi (~> 0.1.0)
       unicode-display_width (~> 1.4.0)
       unicode_utils (~> 1.4.0)
+    strings-ansi (0.1.0)
+    terminal-table (1.8.0)
+      unicode-display_width (~> 1.1, >= 1.1.1)
     thread_safe (0.3.6)
     tty-color (0.4.3)
     tty-cursor (0.6.0)

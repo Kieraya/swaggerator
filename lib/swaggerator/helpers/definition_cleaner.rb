@@ -4,7 +4,9 @@ class Swaggerator::Helpers::DefinitionCleaner
 		routes.map do |route|
 			CLEANABLES.each do |cleanable|
 				route.delete(cleanable)
-			end			
+			end		
+			
+	
 		end
 		routes
 	end

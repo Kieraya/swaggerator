@@ -4,19 +4,26 @@ require 'tty-table'
 require 'terminal-table'
 
 namespace :swaggerator do
-  desc "Generate a swagger file based on the routes file"
+  desc "Checks if configuration is defined"
 
   task check: :environment do 
     puts Swaggerator::Config.open_api_version
   end
+  desc "Generate a swagger.json file based on the definition file"
 
   task generate: :environment do 
+    
+    
     data = YAML.load_file('swag/define.yml')
+
+
     response = Swaggerator::Renderer.render(data)
 
     open("swag/swagger.json", 'w') { |f| f << response.to_json }
 
   end
+  desc "Generate or update a define.yml file based on the routes in the application"
+
   task define: :environment do
     spinner = TTY::Spinner.new
     spinner.auto_spin
