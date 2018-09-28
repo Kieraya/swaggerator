@@ -19,9 +19,11 @@ RSpec.describe Swaggerator::Helpers::ParamsCodifier do
 			properties:{ :address=>{ type: "string", :description=>"Address"},:street=> 
 			{ type: "string", description: "Street"}} }
 		]
-		#puts klass.codify(params)
 		expect(klass.codify(params)).to eq response
 
 
 	end
+
+	#[:subscription_id, :delivery_address_id, :user_id, {:packages=>{:add=>[:id, :package_id, :eta, :package_name, :price, :is_addon, {:included_items=>[:id, :item_id, :item_name, :quantity, :price, :cgst, :sgst, :igst, {:included_skus=>[:id, :sku_id, :sku_name]}]}]}}]
+
 end

@@ -15,8 +15,14 @@ module Swaggerator
 				params_matches.map do |param_match|
 					param_name = param_match[0]
 					@parameters_detected[param_name]||=[]
+
+					puts "PARAM_NAME:", param_name, param_match[1]
+				
+
 					@parameters_detected[param_name]<< eval(param_match[1])[0].to_s if param_match[1]
+
 					@parameters_detected[param_name].uniq!
+				
 				end
 
 				if(@parameters_detected['params'])

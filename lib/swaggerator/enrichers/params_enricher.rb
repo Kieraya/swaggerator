@@ -9,11 +9,17 @@ module Swaggerator
 					source_code = route[:source_code]
 					next if !source_code
 					controller_class =route[:controller_class]
-					extractor= Swaggerator::Extractors::ParamsExtractor.new(source_code)
-					extractor.detect_param_method_fields(controller_class)
-					functional_params = extractor.param_fields
-					field_name = route[:verb].downcase.to_sym == :get ? :query_params : :body_params
-					route[field_name]= Swaggerator::Helpers::ParamsCodifier.codify(functional_params)	
+					begin
+						extractor= Swaggerator::Extractors::ParamsExtractor.new(source_code)
+						extractor.detect_param_method_fields(controller_class)
+						functional_params = extractor.param_fields
+						field_name = route[:verb].downcase.to_sym == :get ? :query_params : :body_params
+						route[field_name]= Swaggerator::Helpers::ParamsCodifier.codify(functional_params)	
+	
+					rescue =>e						
+						Swaggerator::Logger.push ["ParamsExtractor", "#{controller_class.name}###","#{e}"]
+
+					end
 				end
 				routes
 			end
