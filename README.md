@@ -1,8 +1,12 @@
 # Swaggerator
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/swaggerator`. To experiment with that code, run `bin/console` for an interactive prompt.
+Swaggerator creates swagger docs and definitions by reading your source code (route.rb and controllers) and interpreting the request parameters. 
 
-TODO: Delete this and the text above, and describe your gem
+To execute
+``` rake swaggerator:define ``` will define a swag/define.yml file which scans and creates a definition file. The definition file contains request params, route params, etc and can be edited.
+
+``` rake swaggerator:generate ``` will generate a swag/swagger.json file which contains the actuall swagger specifications. 
+
 
 ## Installation
 
